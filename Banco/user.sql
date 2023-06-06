@@ -22,9 +22,11 @@ CREATE TABLE `usuarios` (
 -- Inserir os dados na tabela "usuarios"
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha`, `nascto`, `cep`, `numero`, `complemento`, `telefone`)
 VALUES
-    (UNHEX(REPLACE('6567dadd-3d7c-46c0-a906-86916bebc823', '-', '')), 'Passos Dias Aguiar', '123.456.789-01', 'passos@email.com', '1234', '2000-03-01', '13914-552', '2925', 'BL16 AP14'),
-    (UNHEX(REPLACE('62dae69e-80f8-4504-9409-0acbe84f6744', '-', '')), 'Passos Dias Aguiar', '123.456.789-01', 'passos@email.com', '1234', '2000-03-01', '13914-552', '2925', 'BL16 AP14'),
-    (UNHEX(REPLACE('0411942e-6e65-4ed8-a2e7-a89845c15236', '-', '')), 'Passos Dias Aguiar', '123.456.789-01', 'passos@email.com', '1234', '2000-03-01', '13914-552', '2925', 'BL16 AP14'),
-    (UNHEX(REPLACE('14c5c112-5808-4b6a-8790-999d0ae1314d', '-', '')), 'Passos Dias Aguiar', '123.456.789-01', 'passos@email.com', '1234', '2000-03-01', '13914-552', '2925', 'BL16 AP14');
--- Exibir os registros da tabela "usuarios"
+    (UNHEX(REPLACE('6567dadd-3d7c-46c0-a906-86916bebc823', '-', '')), 'Passos Dias Aguiar', '123.456.789-01', 'passos@email.com', 
+    '$2b$10$y3Is9uYTL/B5ZL0gSzLxqeLbDKY7S26Bujgx.XXrEae9sb/2fUnV6', -- senha criptografada usando bcrypt
+    '2000-03-01', '13914-552', '2925', 'BL16 AP14', NULL),
+    (UNHEX(REPLACE('62dae69e-80f8-4504-9409-0acbe84f6744', '-', '')), 'Ana Silva', '987.654.321-99', 'ana@email.com',
+    '$2b$10$OQr6GXPM.wolCt00Kkzve.0CLbKIL1LCYK8yf9aBScFIOKIDb23Wu', -- senha criptografada usando bcrypt
+    '2000-03-20', '13914-552', '2925', 'BL16 AP15', NULL);
+;
 SELECT * FROM `usuarios`;
