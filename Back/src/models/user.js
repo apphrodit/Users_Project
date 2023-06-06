@@ -24,3 +24,5 @@ class Usuarios {
         return `UPDATE usuarios SET nome = '${this.nome}', cpf = '${this.cpf}', email = '${this.email}', senha = '${this.senha}', nascto = '${this.nascto}', cep = '${this.cep}', numero = '${this.numero}, complemento = '${this.complemento}', telefone = '${this.telefone}' WHERE id = ${id}`
     }
 }   
+
+module.exports = Usuarios;
