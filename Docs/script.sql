@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS `user`;
 USE `user`;
 
 -- Criar a tabela "usuarios"
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE `usuarios` (
     `id` INT NOT NULL,
     `nome` VARCHAR(100) NOT NULL,
     `cpf` VARCHAR(14) NOT NULL,
