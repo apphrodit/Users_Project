@@ -6,7 +6,7 @@ USE `user`;
 
 -- Criar a tabela "usuarios"
 CREATE TABLE `usuarios` (
-    `id` BINARY(16) NOT NULL,
+    `id` BINARY(5) NOT NULL,
     `nome` VARCHAR(100) NOT NULL,
     `cpf` VARCHAR(14) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
