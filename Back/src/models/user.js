@@ -1,5 +1,5 @@
 class Usuarios {
-
+    endereco = {}
     constructor(i){
         this.id = i.id;
         this.nome = i.nome;
@@ -10,9 +10,8 @@ class Usuarios {
         this.cep = i.cep;
         this.numero = i.numero;
         this.complemento = i.complemento;
-        this.telefone = i.telefone;
-    };
-
+        this.telefone = i.telefone == undefined ? [] : i.telefone.split(',')
+    }
     read(){
         if(this.id == undefined)
             return `SELECT * FROM usuarios`
