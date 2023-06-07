@@ -1,5 +1,4 @@
 class Usuarios {
-    endereco = {}
     constructor(i){
         this.id = i.id;
         this.nome = i.nome;
