@@ -24,7 +24,7 @@ INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `email`, `senha`, `nascto`, `cep`, 
 VALUES
     (UNHEX(REPLACE('6567dadd-3d7c-46c0-a906-86916bebc823', '-', '')), 'Passos Dias Aguiar', '123.456.789-01', 'passos@email.com', 
     password('josinei123'),
-    '2000-03-01', '13914-552', '2925', 'BL16 AP14', NULL),
+    '2000-03-01', '13914-552', '2925', 'BL16 AP14', '6969-6969, 8915-5564'),
     (UNHEX(REPLACE('62dae69e-80f8-4504-9409-0acbe84f6744', '-', '')), 'Ana Silva', '987.654.321-99', 'ana@email.com',
     password('juvenalnemapau'),
     '2000-03-20', '13914-552', '2925', 'BL16 AP15', NULL);
