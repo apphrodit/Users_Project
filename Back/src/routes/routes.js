@@ -5,6 +5,6 @@ const Usuarios = require ('../controllers/user');
 
 router.get('/', Usuarios.teste);
 router.get('/usuarios/listar', Usuarios.listar);
-router.get('/usuarios/alterar', Usuarios.alterar);
+router.put('/usuarios/alterar', Usuarios.alterar);
 
 module.exports = router;
