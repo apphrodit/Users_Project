@@ -49,7 +49,7 @@
             fetch('./mockup.json')
                 .then(resposta => resposta.json())
                 .then(dados => {
-                    console.log(dados);
+                    console           .log(dados);
                     //verifica se o usuário e a senha estão corretas
                     if (dados.email === email && dados.senha === senhaMd5.toString()) {
                         //redireciona para a página de perfil
