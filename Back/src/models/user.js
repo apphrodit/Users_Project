@@ -9,7 +9,7 @@ class Usuarios {
         this.cep = i.cep;
         this.numero = i.numero;
         this.complemento = i.complemento;
-        this.telefone = i.telefone == undefined ? [] : i.telefone.split(',')
+        this.telefone = Array.isArray(i.telefone) ? i.telefone.join(',') : (i.telefone || '');
     }
     read(){
         if(this.id == undefined)
@@ -23,7 +23,7 @@ class Usuarios {
     }
 
     update(id) {
-        return `UPDATE usuarios SET nome = '${this.nome}', cpf = '${this.cpf}', email = '${this.email}', senha = '${this.senha}', nascto = '${this.nascto}', cep = '${this.cep}', numero = '${this.numero}', complemento = '${this.complemento}', telefone = '${this.telefone}' WHERE id = ${id}`;
+        return `UPDATE usuarios SET nome = '${this.nome}', cpf = '${this.cpf}', email = '${this.email}', senha = password('${this.senha}'), nascto = '${this.nascto}', cep = '${this.cep}', numero = '${this.numero}', complemento = '${this.complemento}', telefone = '${this.telefone}' WHERE id = ${this.id}`;
     }
     
 }   

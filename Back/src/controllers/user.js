@@ -27,17 +27,19 @@ const listar = (req, res) => {
 const alterar = (req, res) => {
     let usuarios = new Usuarios(req.body);
     con.query(usuarios.update(), (err, result) => {
-        if (err == null) {
-            if (result.affectedRows > 0) {
-                res.status(202).end();
-            } else {
-                res.status(404).end();
-            }
+        if (err) {
+            console.error(err);
+            res.status(500).json('Erro ao atualizar dados no banco de dados').end();
+            return;
+        }
+        if (result.affectedRows > 0) {
+            res.status(202).end();
         } else {
-            res.status(500).json('Banco De Dados não Respondeu').end();
+            res.status(404).end();
         }
     });
 };
+
 
 const login = (req, res) => {
     let usuarios = new Usuarios(req.body);
