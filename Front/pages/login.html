@@ -46,7 +46,7 @@
             //converte a senha em md5
             const senhaMd5 = md5(senha);
             //faz a requisição para o servidor
-            fetch('./mockup.json')
+            fetch('../Banco/user.sql')
                 .then(resposta => resposta.json())
                 .then(dados => {
                     console           .log(dados);
