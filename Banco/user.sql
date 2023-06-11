@@ -27,6 +27,8 @@ VALUES
     '2000-03-01', '13914-552', '2925', 'BL16 AP14', '6969-6969, 8915-5564'),
     ('Ana Silva', '987.654.321-99', 'ana@email.com',
     password('juvenalnemapau'),
-    '2000-03-20', '13914-552', '2925', 'BL16 AP15', NULL);
+    '2000-03-20', '13914-552', '2925', 'BL16 AP15', NULL),
+    ('Xupaco do Silva', '666.666.666-77', '20comer70correr@email.com',
+     password('delicious123'), '1969-01-24', '13999-320', '123', 'FUNDOS', '9992-2424, 9969-2424');
 
 SELECT * FROM `usuarios`;
