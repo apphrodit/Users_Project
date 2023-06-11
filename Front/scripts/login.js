@@ -1,3 +1,8 @@
+// Importe a biblioteca 'crypto-js' para utilizar o algoritmo de criptografia AES
+const CryptoJS = require('crypto-js');
+
+// ...
+
 function fazerLogin() {
   const email = document.getElementById('email').value;
   const senha = document.getElementById('senha').value;
@@ -16,10 +21,13 @@ function fazerLogin() {
       if (data.length > 0) {
         const usuario = data[0];
 
+        // Criptografa o id usando AES
+        const encryptedId = CryptoJS.AES.encrypt(usuario.id.toString(), 'chave-secreta').toString();
+
         // Armazena os dados do usuário no Local Storage
         localStorage.setItem('usuario', JSON.stringify(usuario));
 
-        window.location.href = `perfil2.html?id=${usuario.id}`;
+        window.location.href = `perfil2.html?id=${encryptedId}`;
       } else {
         // Email ou senha incorretos, exibir mensagem de erro
         alert('Email ou senha incorretos');

@@ -1,26 +1,41 @@
-function carregarPerfil() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('id');
+document.addEventListener('DOMContentLoaded', function() {
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
+  if (usuario) {
+    const idElement = document.getElementById('id');
+    const nomeElement = document.getElementById('nome');
+    const cpfElement = document.getElementById('cpf');
+    const emailElement = document.getElementById('email');
+    const senhaElement = document.getElementById('senha');
+    const nasctoElement = document.getElementById('nascto');
+    const cepElement = document.getElementById('cep');
+    const numeroElement = document.getElementById('numero');
+    const complementoElement = document.getElementById('complemento');
+    const telefoneElement = document.getElementById('telefone');
   
-    // Recupera os dados do usuário do Local Storage
-    const usuarioString = localStorage.getItem('usuario');
-    const usuario = JSON.parse(usuarioString);
-  
-    if (usuario && usuario.id === userId) {
-      const perfilContainer = document.getElementById('perfil-container');
-      perfilContainer.innerHTML = `
-        <p>ID: ${usuario.id}</p>
-        <p>Nome: ${usuario.nome}</p>
-        <p>CPF: ${usuario.cpf}</p>
-        <p>Email: ${usuario.email}</p>
-        <p>Data de Nascimento: ${usuario.nascto}</p>
-        <p>Endereço: ${usuario.endereco}</p>
-        <p>Telefones: ${usuario.telefones}</p>
-      `;
-    } else {
-      // Usuário não autenticado ou dados inválidos
-      alert('Usuário não autenticado');
-      window.location.href = 'login.html'; // Redireciona de volta para a página de login
+    idElement.textContent = 'Id: ' + usuario.id;
+    nomeElement.textContent = 'Nome: ' + usuario.nome;
+    cpfElement.textContent = 'CPF: ' + usuario.cpf;
+    emailElement.textContent = 'Email: ' + usuario.email;
+    senhaElement.textContent = 'Senha: ' + '******';
+    nasctoElement.textContent = 'Data de Nascimento: ' + formatarData(usuario.nascto);
+    cepElement.textContent = 'CEP: ' + usuario.cep;
+    numeroElement.textContent = 'Número: ' + usuario.numero;
+    complementoElement.textContent = 'Complemento: ' + usuario.complemento;
+    telefoneElement.textContent = 'Telefone:';
+    
+    for (const telefone of usuario.telefone) {
+      const telefoneItem = document.createElement('p');
+      telefoneItem.textContent = telefone;
+      telefoneElement.appendChild(telefoneItem);
     }
+
+    // Remover dados do Local Storage
+    localStorage.removeItem('usuario');
   }
-  
+});
+
+function formatarData(data) {
+  const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+  return new Date(data).toLocaleDateString('pt-BR', options);
+}
+
