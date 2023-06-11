@@ -1,19 +1,26 @@
 function carregarPerfil() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('id');
-
-    fetch(`http://localhost:3000/usuarios/${userId}`)
-        .then(response => response.json())
-        .then(usuario => {
-            document.getElementById('id').textContent = usuario.id;
-            document.getElementById('nome').textContent = usuario.nome;
-            document.getElementById('cpf').textContent = usuario.cpf;
-            document.getElementById('email').textContent = usuario.email;
-            document.getElementById('nascto').textContent = usuario.nascto;
-            document.getElementById('endereco').textContent = usuario.endereco;
-            document.getElementById('telefones').textContent = usuario.telefones;
-        })
-        .catch(error => {
-            console.error('Ocorreu um erro ao carregar o perfil:', error);
-        });
-}
+  
+    // Recupera os dados do usuário do Local Storage
+    const usuarioString = localStorage.getItem('usuario');
+    const usuario = JSON.parse(usuarioString);
+  
+    if (usuario && usuario.id === userId) {
+      const perfilContainer = document.getElementById('perfil-container');
+      perfilContainer.innerHTML = `
+        <p>ID: ${usuario.id}</p>
+        <p>Nome: ${usuario.nome}</p>
+        <p>CPF: ${usuario.cpf}</p>
+        <p>Email: ${usuario.email}</p>
+        <p>Data de Nascimento: ${usuario.nascto}</p>
+        <p>Endereço: ${usuario.endereco}</p>
+        <p>Telefones: ${usuario.telefones}</p>
+      `;
+    } else {
+      // Usuário não autenticado ou dados inválidos
+      alert('Usuário não autenticado');
+      window.location.href = 'login.html'; // Redireciona de volta para a página de login
+    }
+  }
+  

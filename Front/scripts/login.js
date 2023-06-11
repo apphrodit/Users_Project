@@ -11,9 +11,14 @@ function fazerLogin() {
   })
     .then(response => response.json())
     .then(data => {
+      console.log(data); // Adicionado console.log para exibir a resposta da requisição
+
       if (data.length > 0) {
-       
         const usuario = data[0];
+
+        // Armazena os dados do usuário no Local Storage
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+
         window.location.href = `perfil2.html?id=${usuario.id}`;
       } else {
         // Email ou senha incorretos, exibir mensagem de erro
