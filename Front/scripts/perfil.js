@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       telefoneElement.appendChild(telefoneItem);
     }
 
-    // Remover dados do Local Storage
+    
     localStorage.removeItem('usuario');
   }
 });
@@ -38,4 +38,5 @@ function formatarData(data) {
   const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
   return new Date(data).toLocaleDateString('pt-BR', options);
 }
+
 

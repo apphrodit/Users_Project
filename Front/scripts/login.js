@@ -17,7 +17,7 @@ function fazerLogin() {
         const usuario = data[0];
         localStorage.setItem('usuario', JSON.stringify(usuario));
 
-        window.location.href = `perfil2.html`; // Redireciona para a página de perfil
+        window.location.href = `perfil2.html`;
       } else {
         alert('Email ou senha incorretos');
       }
