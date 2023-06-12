@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const numeroElement = document.getElementById('numero');
     const complementoElement = document.getElementById('complemento');
     const telefoneElement = document.getElementById('telefone');
-    const editarForm = document.getElementById('editar-form');
   
     idElement.textContent = 'Id: ' + usuario.id;
     nomeElement.textContent = 'Nome: ' + usuario.nome;
@@ -23,57 +22,46 @@ document.addEventListener('DOMContentLoaded', function() {
     numeroElement.textContent = 'Número: ' + usuario.numero;
     complementoElement.textContent = 'Complemento: ' + usuario.complemento;
     telefoneElement.textContent = 'Telefone: ' + usuario.telefone;
-
-    // Preencher campos de edição com os dados do usuário
-    const nomeInput = document.getElementById('nome-input');
-    const emailInput = document.getElementById('email-input');
-    const senhaInput = document.getElementById('senha-input');
-    const cepInput = document.getElementById('cep-input');
-    const numeroInput = document.getElementById('numero-input');
-    const complementoInput = document.getElementById('complemento-input');
-    const telefoneInput = document.getElementById('telefone-input');
-
-    nomeInput.value = usuario.nome;
-    emailInput.value = usuario.email;
-    senhaInput.value = usuario.senha;
-    cepInput.value = usuario.cep;
-    numeroInput.value = usuario.numero;
-    complementoInput.value = usuario.complemento;
-    telefoneInput.value = usuario.telefone.join(', ');
-
-    // Adicionar evento de envio do formulário de edição
-    editarForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // Obter os novos valores do formulário
-      const novoNome = nomeInput.value;
-      const novoEmail = emailInput.value;
-      const novaSenha = senhaInput.value;
-      const novoCep = cepInput.value;
-      const novoNumero = numeroInput.value;
-      const novoComplemento = complementoInput.value;
-      const novoTelefone = telefoneInput.value.split(',').map(item => item.trim());
-
-      // Atualizar os dados na tela
-      nomeElement.textContent = 'Nome: ' + novoNome;
-      emailElement.textContent = 'Email: ' + novoEmail;
+    
+   
+    const form = document.getElementById('editar-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      
+    
+      const nomeInput = document.getElementById('nome-input').value;
+      const emailInput = document.getElementById('email-input').value;
+      const senhaInput = document.getElementById('senha-input').value;
+      const cepInput = document.getElementById('cep-input').value;
+      const numeroInput = document.getElementById('numero-input').value;
+      const complementoInput = document.getElementById('complemento-input').value;
+      const telefoneInput = document.getElementById('telefone-input').value;
+      
+      nomeElement.textContent = 'Nome: ' + nomeInput;
+      emailElement.textContent = 'Email: ' + emailInput;
       senhaElement.textContent = 'Senha: ' + '******';
-      cepElement.textContent = 'CEP: ' + novoCep;
-      numeroElement.textContent = 'Número: ' + novoNumero;
-      complementoElement.textContent = 'Complemento: ' + novoComplemento;
-      telefoneElement.textContent = 'Telefone: ' + novoTelefone;
-
-      // Atualizar os dados no localStorage
-      usuario.nome = novoNome;
-      usuario.email = novoEmail;
-      usuario.senha = novaSenha;
-      usuario.cep = novoCep;
-      usuario.numero = novoNumero;
-      usuario.complemento = novoComplemento;
-      usuario.telefone = novoTelefone;
+      cepElement.textContent = 'CEP: ' + cepInput;
+      numeroElement.textContent = 'Número: ' + numeroInput;
+      complementoElement.textContent = 'Complemento: ' + complementoInput;
+      telefoneElement.textContent = 'Telefone: ' + telefoneInput;
+      
+      
+      usuario.nome = nomeInput;
+      usuario.email = emailInput;
+      usuario.senha = senhaInput;
+      usuario.cep = cepInput;
+      usuario.numero = numeroInput;
+      usuario.complemento = complementoInput;
+      usuario.telefone = telefoneInput.split(',');
+      
+      
       localStorage.setItem('usuario', JSON.stringify(usuario));
+      
+      
+      form.reset();
     });
-
+    
+    
     localStorage.removeItem('usuario');
   }
 });
