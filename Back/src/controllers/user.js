@@ -26,7 +26,8 @@ const listar = (req, res) => {
 
 const alterar = (req, res) => {
     let usuarios = new Usuarios(req.body);
-    con.query(usuarios.update(), (err, result) => {
+    const id = req.params.id;
+    con.query(usuarios.update(id), (err, result) => {
         if (err) {
             console.error(err);
             res.status(500).json('Erro ao atualizar dados no banco de dados').end();
