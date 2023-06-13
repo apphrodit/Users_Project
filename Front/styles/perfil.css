@@ -42,7 +42,7 @@
     border-radius: 5px;
     color: white;
   }
-  
+
   .form-group {
     margin-bottom: 15px;
   }
@@ -64,6 +64,7 @@
     justify-content: center;
   }
   
+
   button[type="submit"] {
     padding: 10px 20px;
     background-color: #007bff;
