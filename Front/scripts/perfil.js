@@ -17,10 +17,10 @@ function Atualizar() {
   const dadosAtualizados = {
     id: usuario.id,
     nome: nomeInput,
-    cpf: usuario.cpf, // mantendo o CPF original
+    // cpf: usuario.cpf, // mantendo o CPF original
     email: emailInput,
     senha: senhaInput,
-    nascto: usuario.nascto, // mantendo a data de nascimento original
+    nascto: nasctoInput, // mantendo a data de nascimento original
     cep: cepInput,
     numero: numeroInput,
     complemento: complementoInput,
