@@ -10,43 +10,60 @@ function Atualizar() {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   if (!usuario) {
     alert('Não há informações de usuário disponíveis');
-
     return;
   }
 
-  fetch(`http://localhost:3000/usuarios/alterar/:id`, {
+  const dadosAtualizados = {
+    id: usuario.id,
+    nome: nomeInput,
+    cpf: usuario.cpf, // mantendo o CPF original
+    email: emailInput,
+    senha: senhaInput,
+    nascto: usuario.nascto, // mantendo a data de nascimento original
+    cep: cepInput,
+    numero: numeroInput,
+    complemento: complementoInput,
+    telefone: telefoneInput.split(',')
+  };
 
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      nome: nomeInput,
-      email: emailInput,
-      senha: senhaInput,
-      cep: cepInput,
-      numero: numeroInput,
-      complemento: complementoInput,
-      telefone: telefoneInput
-    })
+  fetch(`http://localhost:3000/usuarios/alterar/${usuario.id}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(dadosAtualizados)
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Ocorreu um erro ao atualizar os dados do usuário');
+    }
+    return response.json();
   })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
+  .then(data => {
+    console.log(data); // Adicione esta linha para verificar a resposta do servidor no console
+    if (data) {
+      const usuarioAtualizado = data[0];
+      localStorage.setItem('usuario', JSON.stringify(usuarioAtualizado));
 
-      if (data.length > 0) {
-        const usuario = data[0];
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+      // Atualizar os elementos HTML com os dados atualizados
+      nomeElement.textContent = 'Nome: ' + usuarioAtualizado.nome;
+      emailElement.textContent = 'Email: ' + usuarioAtualizado.email;
+      senhaElement.textContent = 'Senha: ' + '******';
+      cepElement.textContent = 'CEP: ' + usuarioAtualizado.cep;
+      numeroElement.textContent = 'Número: ' + usuarioAtualizado.numero;
+      complementoElement.textContent = 'Complemento: ' + usuarioAtualizado.complemento;
+      telefoneElement.textContent = 'Telefone: ' + usuarioAtualizado.telefone;
 
-        window.location.href = `perfil2.html`;
-      } else {
-        alert('Ocorreu um erro ao atualizar os dados do usuário');
-      }
-    })
-    .catch(error => {
-      console.error('Ocorreu um erro ao atualizar os dados do usuário:', error);
-    });
+      alert('Dados atualizados com sucesso!');
+    } else {
+      alert('Ocorreu um erro ao atualizar os dados do usuário');
+    }
+  })
+  .catch(error => {
+    console.error('Ocorreu um erro ao atualizar os dados do usuário:', error.message);
+  });
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
@@ -72,8 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
     numeroElement.textContent = 'Número: ' + usuario.numero;
     complementoElement.textContent = 'Complemento: ' + usuario.complemento;
     telefoneElement.textContent = 'Telefone: ' + usuario.telefone;
-
-
   }
 
   function formatarData(data) {
