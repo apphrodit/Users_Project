@@ -21,11 +21,10 @@ class Usuarios {
     login(i){
         return `SELECT * FROM usuarios WHERE email = '${this.email}' AND senha = password('${this.senha}')`
     }
+    update(id) {
+        return `UPDATE usuarios SET nome = '${this.nome}',email = '${this.email}', senha = password('${this.senha}'), nascto = '${this.nascto}', cep = '${this.cep}', numero = '${this.numero}', complemento = '${this.complemento}', telefone = '${this.telefone}' WHERE id = ${id}`;
+      } 
 
-    update() {
-        return `UPDATE usuarios SET nome = '${this.nome}', cpf = '${this.cpf}', email = '${this.email}', senha = password('${this.senha}'), nascto = '${this.nascto}', cep = '${this.cep}', numero = '${this.numero}', complemento = '${this.complemento}', telefone = '${this.telefone}' WHERE id = ${this.id}`;
-    }
-    
 }   
 
 module.exports = Usuarios;
