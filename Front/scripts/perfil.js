@@ -1,4 +1,7 @@
+// Arquivo: perfil.js
+
 function Atualizar() {
+  // Obtenção dos valores dos campos de entrada
   const nomeInput = document.getElementById('nome-input').value;
   const emailInput = document.getElementById('email-input').value;
   const senhaInput = document.getElementById('senha-input').value;
@@ -8,25 +11,27 @@ function Atualizar() {
   const complementoInput = document.getElementById('complemento-input').value;
   const telefoneInput = document.getElementById('telefone-input').value;
 
+  // Obtenção do usuário atual do armazenamento local
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   if (!usuario) {
     alert('Não há informações de usuário disponíveis');
     return;
   }
 
+  // Criação do objeto de dados atualizados
   const dadosAtualizados = {
     id: usuario.id,
     nome: nomeInput,
-    // cpf: usuario.cpf, // mantendo o CPF original
     email: emailInput,
     senha: senhaInput,
-    nascto: nasctoInput, // mantendo a data de nascimento original
+    nascto: nasctoInput,
     cep: cepInput,
     numero: numeroInput,
     complemento: complementoInput,
     telefone: telefoneInput.split(',')
   };
 
+  // Requisição de atualização para o servidor
   fetch(`http://localhost:3000/usuarios/alterar/${usuario.id}`, {
     method: 'PUT',
     headers: {
@@ -38,15 +43,20 @@ function Atualizar() {
       if (!response.ok) {
         throw new Error('Ocorreu um erro ao atualizar os dados do usuário');
       }
-      return response.json();
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        return response.json();
+      } else {
+        throw new Error('A resposta do servidor não contém um JSON válido');
+      }
     })
     .then(data => {
       console.log(data); // Adicione esta linha para verificar a resposta do servidor no console
-      if (data) {
+      if (Array.isArray(data) && data.length > 0) {
         const usuarioAtualizado = data[0];
         localStorage.setItem('usuario', JSON.stringify(usuarioAtualizado));
 
-        // Atualizar os elementos HTML com os dados atualizados
+        // Atualização dos elementos HTML com os dados atualizados
         const nomeElement = document.getElementById('nome');
         const emailElement = document.getElementById('email');
         const senhaElement = document.getElementById('senha');
@@ -67,7 +77,7 @@ function Atualizar() {
 
         alert('Dados atualizados com sucesso!');
       } else {
-        alert('Ocorreu um erro ao atualizar os dados do usuário');
+        throw new Error('A resposta do servidor não contém um objeto JSON válido');
       }
     })
     .catch(error => {
@@ -76,8 +86,10 @@ function Atualizar() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Obtém o usuário atual do armazenamento local
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   if (usuario) {
+    // Atualiza os elementos HTML com os dados do usuário atual
     const idElement = document.getElementById('id');
     const nomeElement = document.getElementById('nome');
     const cpfElement = document.getElementById('cpf');
